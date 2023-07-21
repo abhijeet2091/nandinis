@@ -1,0 +1,95 @@
+{% include "header.html" %}
+<br>
+<!--<section class="shop_section layout_padding">-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="box">
+                <h4 style="text-align: center; background-color: #f39450;">
+                    Pending Order(s)
+                </h4>
+                    <div class="img-box">
+                        <div class="container">
+                            {% for i in order_id_pending %}
+                                Order# {{ i.order_id }} <strong>&#8377; {{ i.total_val }}</strong>
+                                {% for order in order_data_pending %}
+                                <div style="font-size: small;">
+                                    {% if order.order_id == i.order_id %}
+                                        {% if not order.order_confirmed and not order.order_delivered %}
+                                            <li>
+                                                {{ order.order_quan }} kg {{ order.sweet_name }} X {{ order.sweet_name.price }} per kg = 
+                                                &#8377;{{ order.order_val }}
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                {% endfor %}<br>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="box">
+                <h4 style="text-align: center; background-color: #f39450;">
+                    Confirmed Order(s)
+                </h4>
+                    <div class="img-box">
+                        <div class="container">
+                            {% for i in order_id_confirmed %}
+                                    Order#{{ i.order_id }}
+                                <strong>
+                                    &#8377;{{ i.total_val }}
+                                </strong>
+                                {% for order in order_data_confirmed %}
+                                <div style="font-size: small;">
+                                    {% if order.order_id == i.order_id %}
+                                        {% if order.order_confirmed and not order.order_delivered %}
+                                            <li>
+                                                {{ order.order_quan }} kg {{ order.sweet_name }} X {{ order.sweet_name.price }} per kg = 
+                                                &#8377;{{ order.order_val }}
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="box">
+                <h4 style="text-align: center; background-color: #f39450;">
+                    Delivered Order(s)
+                </h4>
+                    <div class="img-box">
+                        <div class="container">
+                            {% for i in order_id_delivered %}
+                                Order#{{ i.order_id }}
+                                <strong>
+                                    &#8377;{{ i.total_val }}
+                                </strong>
+                                {% for order in order_data_delivered %}
+                                <div style="font-size: small;">
+                                    {% if order.order_id == i.order_id %}
+                                        {% if order.order_delivered %}
+                                            <li>
+                                                {{ order.order_quan }} kg {{ order.sweet_name }} X {{ order.sweet_name.price }} per kg = 
+                                                &#8377;{{ order.order_val }}
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--</section>-->
+{% include "footer.html" %}

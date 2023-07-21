@@ -1,0 +1,19 @@
+{% include "header.html" %}
+
+
+    {% if user.is_authenticated %}
+    {{ user.get_username }}
+    {% endif %}
+<h1>
+    Your order is confirmed!
+</h1>
+
+{% for key, value in context.items %}
+<p>
+    {{ value.sweet_name }}
+    {{ value.order_quan }} kg
+    <strong>&#8377;{{ value.order_val }}</strong>
+</p>
+{% endfor %}
+
+{% include "footer.html" %}

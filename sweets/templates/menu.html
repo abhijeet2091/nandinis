@@ -1,0 +1,60 @@
+{% include "header.html" %}
+{% load static %}
+</div>
+
+<!-- shop section -->
+<form method="POST" action="">    
+    {% csrf_token %}
+    
+  <section class="shop_section layout_padding">
+    <div class="container">
+      <h5>
+        {% if user.is_authenticated %}
+        Welcome {{ user.get_username }}!
+        {% endif %}
+      </h5>
+      {% for l in sweet_category %}
+      <h1 style="background-color: #fecea8;">{{l.sweet_category}}</h1>
+
+      <div class="row">
+        {% for s in sweet_data %} 
+        {% if s.sweet_category == l.sweet_category %}    
+
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="box">
+            <h4 style="text-align: center;">
+                {{s.sweet_name}}
+            </h4>
+              <div class="img-box">
+                <img src="{% static s.sweet_name %}.jpeg" alt="{{s.sweet_name}}" width = "300" height="250">
+              </div>
+              <div class="detail-box">
+                <h6>&#8377; {{s.price}} per kg</h6>
+                <h6>
+                    <select name="{{s.sweet_name}}">
+                        <option value="0">quantity</option>
+                        <option value="0.5">0.5 kg</option>
+                        <option value="1">1 kg</option>
+                        <option value="1.5">1.5 kg</option>
+                        <option value="2">2 kg</option>
+                        <option value="2.5">2.5 kg</option>
+                        <option value="3">3 kg</option>
+                        <option value="3.5">3.5 kg</option>
+                        <option value="4">4 kg</option>
+                        <option value="4.5">4.5 kg</option>
+                        <option value="5">5 kg</option>
+                    </select>
+                </h6>
+              </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}  
+      </div><br>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" style="background-color: #fecea8; color: black;">Place Order</button>
+    </div>
+  </section>
+</form>
+
+{% include "footer.html" %}
